@@ -1,6 +1,7 @@
 Flask-SQLAlchemy==3.1.1
 python-jose[cryptography]==3.3.0
 Flask-Cors==3.0.8
+Flask-Migrate==4.0.7
 SQLAlchemy==2.0.36
 astroid==3.3.5
 blinker==1.9.0
