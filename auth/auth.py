@@ -3,6 +3,7 @@ from flask import request
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
+import os
 
 #https://dev-iyauk2au1anrxgs7.us.auth0.com/authorize?audience=casting-agency-api&response_type=token&client_id=LLlhXGEd6NaHPLYbwLxdXQp8M70mILEt&redirect_uri=https://127.0.0.1:5000/
 AUTH0_DOMAIN = 'dev-iyauk2au1anrxgs7.us.auth0.com'
@@ -105,6 +106,7 @@ def verify_decode_jwt(token):
                 'code': 'invalid_claims',
                 'description': 'Incorrect claims. Please, check the audience and issuer.'
             }, 401)
+        except jose.exceptions.JWSError
         except Exception:
             raise AuthError({
                 'code': 'invalid_header',
@@ -119,6 +121,9 @@ def requires_auth(permission=''):
     def requires_auth_decorator(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
+            if os.getenv('TESTING') == 'True':
+                mock_payload = {"sub": "test_user", "permissions": ['get:movies']}  # Mock payload
+                return f(mock_payload, *args, **kwargs)  # Pass mock payload to function
             token = get_token_auth_header()
             payload = verify_decode_jwt(token)
             check_permissions(permission, payload)

@@ -1,19 +1,20 @@
 import os
+import json
 from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from database.models import setup_db, db, db_create_all, Movie, Actor, CastingRole
 from auth.auth import requires_auth, AuthError
+import sys
 from datetime import datetime
 import sys
 from werkzeug.exceptions import UnprocessableEntity, InternalServerError
-import debugpy
 
 
 #Code to enable the Debugging of the application
-if os.environ.get("FLASK_ENV") == "development" and not debugpy.is_client_connected():
-   debugpy.listen(("0.0.0.0", 5780))
-   print("Debug mode Enabled")
+# if os.environ.get("FLASK_ENV") == "development" and not debugpy.is_client_connected():
+#    debugpy.listen(("0.0.0.0", 5780))
+#    print("Debug mode Enabled")
 
 def create_app(test_config=None):
   # create and configure the app
@@ -26,20 +27,22 @@ def create_app(test_config=None):
             database_path = test_config.get('SQLALCHEMY_DATABASE_URI')
             setup_db(app, database_path=database_path)
 
-    #return app
-
-#app = create_app()
-
-#db_create_all()
+    '''
+    CORS Headers
+    '''
 
     @app.after_request
     def after_request(response):
-        response.headers.add("Access-Control-Allow-Origin", "*")
         response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization,true")
         response.headers.add("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE,PUT")
         return response
 
-    @app.route('/')
+
+    '''
+    Test Route to test the application.
+    '''
+
+    @app.route('/', methods=['GET'])
     def index():
         print('Success!!')
         return jsonify({
@@ -49,12 +52,13 @@ def create_app(test_config=None):
 
     '''
         GET /movies
-            Fetches all the available Movies in database
-        returns status code 200 and json {"success": True, "movies": movies} where movies is the list of all the movies
-            or appropriate status code indicating reason for failure
+            - Fetches all the available Movies in database
+            - Requires 'get:movies' permission
+            - returns status code 200 and json {"success": True, "movies": movies} where movies is the list of all the movies
+            or the Status Code in case of Failure
     '''
     @app.route('/movies', methods=['GET'])
-    @requires_auth('get:movies')
+    @requires_auth(permission='get:movies')
     def get_movies(payload):
         movies = Movie.query.order_by(Movie.creation_time).all()
         if len(movies) == 0:
@@ -76,17 +80,18 @@ def create_app(test_config=None):
             })
 
     '''
-        GET /movies
-            Fetches all the available Movies in database
-        returns status code 200 and json {"success": True, "movies": movies} where movies is the list of all the movies
-            or appropriate status code indicating reason for failure
+        GET /movie/{movie_id}
+            - Fetches all the available Movies in database
+            - Requires 'get:movies' permission
+            - returns status code 200 and json {"success": True, "movies": movies} where movies is the list of all the movies
+            or the Status Code in case of Failure
     '''
     @app.route('/movie/<int:movie_id>', methods=['GET'])
-    @requires_auth('get:movies')
+    @requires_auth(permission='get:movies')
     def get_movie(payload, movie_id):
         movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
         if movie is None:
-            abort(404)
+            abort(422)
         roles = movie.roles
         roles_json = []
         for role in roles:
@@ -100,10 +105,7 @@ def create_app(test_config=None):
                 'movie' : movie_json
             })
 
-    '''
-        Method to check if there is a movie with same Title in database.
-        If movie exists it will throw 422 ERROR.
-    '''
+    
     def check_movie_title_exists(title):
         movie = Movie.query.filter(Movie.title  == title).one_or_none()
         if movie is not None:
@@ -113,12 +115,13 @@ def create_app(test_config=None):
 
     '''
         POST /movies
-            Saves the movie data in Database
-        returns status code 200 and json {"success": True, "movie_id": movie_id} where movie_id is the id of the newly created movie
-            or appropriate status code indicating reason for failure
+            - Saves the movie data in Database
+            - Requires 'post:movies' permission
+            - returns status code 200 and json {"success": True, "movie_id": movie_id} where movie_id is the id of the newly created movie
+            or the Status Code in case of Failure
     '''
     @app.route('/movie', methods=['POST'])
-    #@requires_auth('post:movies')
+    @requires_auth(permission='post:movies')
     def add_movies(payload):
         body = request.get_json()
         title = body.get('title', None)
@@ -137,18 +140,18 @@ def create_app(test_config=None):
         except:
             message = "Error : {0}".format(sys.exc_info())
             print(message)
-            #abort(500)
             raise InternalServerError(message)
         
 
     '''
         PATCH /movie/<int:movie_id>
-            Update the movie data in Database
-        returns status code 200 and json {"success": True} where movie_id is the id of the newly created movie
-            or appropriate status code indicating reason for failure
+            - Update the movie data in Database for a Movie ID
+            - Requires 'post:movies' permission
+            - returns status code 200 and json {"success": True} where movie_id is the id of the newly created movie
+            or the Status Code in case of Failure
     '''
     @app.route('/movie/<int:movie_id>', methods=['PATCH'])
-    #@requires_auth('patch:movies')
+    @requires_auth(permission='patch:movies')
     def update_movie(payload, movie_id):
             movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
             if movie is None:
@@ -181,12 +184,13 @@ def create_app(test_config=None):
 
     '''
         DELETE /movie/<int:movie_id>
-            Delete the movie data from Database
-        returns status code 200 and json {"success": True, "movie_id": movie_id} where movie_id is the id of the movie deleted
-            or appropriate status code indicating reason for failure
+            - Delete the movie data from Database for a given Movie ID
+            - Requires 'delete:movies' permission
+            - returns status code 200 and json {"success": True, "movie_id": movie_id} where movie_id is the id of the movie deleted
+            or the Status Code in case of Failure
     '''
     @app.route('/movie/<int:movie_id>', methods=['DELETE'])
-    #@requires_auth('delete:movies')
+    @requires_auth(permission='delete:movies')
     def delete_movie(payload, movie_id):
         
         movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
@@ -205,12 +209,13 @@ def create_app(test_config=None):
 
     '''
         GET /actors
-            Fetches all the available Actors in database
-        returns status code 200 and json {"success": True, "actors": actors} where actors is the list of all the actors
-            or appropriate status code indicating reason for failure
+            - Fetches all the available Actors in database
+            - Requires 'get:actors' permission
+            - returns status code 200 and json {"success": True, "actors": actors} where actors is the list of all the actors
+            or the Status Code in case of Failure
     '''
     @app.route('/actors', methods=['GET'])
-    #@requires_auth('get:actors')
+    @requires_auth(permission='get:actors')
     def get_actors(payload):
         actors = Actor.query.order_by(Actor.name).all()
         if len(actors) == 0:
@@ -236,10 +241,10 @@ def create_app(test_config=None):
         GET /actor/<int:actor_id>
             Fetches the actor corrsponding to the actor_id
         returns status code 200 and json {"success": True, "actor": actor} 
-            or appropriate status code indicating reason for failure
+            or the Status Code in case of Failure
     '''
     @app.route('/actor/<int:actor_id>', methods=['GET'])
-    #@requires_auth('get:actors')
+    @requires_auth('get:actors')
     def get_actor(payload, actor_id):
         actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
         if actor is None:
@@ -255,10 +260,10 @@ def create_app(test_config=None):
         POST /actor
             Saves the actor data in Database
         returns status code 200 and json {"success": True, "actor_id": actor_id} where actor_id is the id of the newly created actor
-            or appropriate status code indicating reason for failure
+            or the Status Code in case of Failure
     '''
     @app.route('/actor', methods=['POST'])
-    #@requires_auth('post:actors')
+    @requires_auth('post:actors')
     def add_actors(payload):
         body = request.get_json()
         name = body.get('name', None)
@@ -287,10 +292,10 @@ def create_app(test_config=None):
         PATCH /actor/<int:actor_id>
             Update the movie data in Database
         returns status code 200 and json {"success": True}
-            or appropriate status code indicating reason for failure
+            or the Status Code in case of Failure
     '''
     @app.route('/actor/<int:actor_id>', methods=['PATCH'])
-    #@requires_auth('patch:actors')
+    @requires_auth('patch:actors')
     def update_actor(payload, actor_id):
             actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
             if actor is None:
@@ -337,10 +342,10 @@ def create_app(test_config=None):
         DELETE /actor/<int:actor_id>
             Delete the actor data from Database
         returns status code 200 and json {"success": True, "actor_id": actor_id} where actor_id is the id of the actor deleted
-            or appropriate status code indicating reason for failure
+            or the Status Code in case of Failure
     '''
     @app.route('/actor/<int:actor_id>', methods=['DELETE'])
-    #@requires_auth('delete:actors')
+    @requires_auth('delete:actors')
     def delete_actor(payload, actor_id):
         
         actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
@@ -361,10 +366,10 @@ def create_app(test_config=None):
         GET /casting-roles
             Fetches all the available Casting Roles in database
         returns status code 200 and json {"success": True, "casting_roles": casting_roles} where casting_roles is the list of all the Casting Roles
-            or appropriate status code indicating reason for failure
+            or the Status Code in case of Failure
     '''
     @app.route('/casting-roles', methods=['GET'])
-    #@requires_auth('get:castingRoles')
+    @requires_auth('get:castingRoles')
     def get_castingRoles(payload):
         casting_roles = CastingRole.query.join(Movie).join(Actor).with_entities(CastingRole.role_id, CastingRole.role_name, CastingRole.is_lead_role, CastingRole.description, CastingRole.movie_id, CastingRole.actor_id, Movie.title, Actor.name).order_by(CastingRole.role_name).all()
         if len(casting_roles) == 0:
@@ -394,10 +399,10 @@ def create_app(test_config=None):
         POST /casting-role
             Saves the Role data in Database
         returns status code 200 and json {"success": True, "role_id": role_id} where role_id is the id of the newly created role
-            or appropriate status code indicating reason for failure
+            or the Status Code in case of Failure
     '''
     @app.route('/casting-role', methods=['POST'])
-    #@requires_auth('post:castingRoles')
+    @requires_auth('post:castingRoles')
     def add_castingRole(payload):
         body = request.get_json()
 
@@ -441,10 +446,10 @@ def create_app(test_config=None):
         PATCH /casting-role/<int:role_id>
             Update the movie data in Database
         returns status code 200 and json {"success": True} where role_id is the id of the role that need to be updated
-            or appropriate status code indicating reason for failure
+            or the Status Code in case of Failure
     '''
     @app.route('/casting-role/<int:role_id>', methods=['PATCH'])
-    #@requires_auth('patch:castingRoles')
+    @requires_auth('patch:castingRoles')
     def update_role(payload, role_id):
             role = CastingRole.query.filter(CastingRole.role_id == role_id).one_or_none()
             if role is None:
@@ -490,10 +495,10 @@ def create_app(test_config=None):
         DELETE /casting-role/<int:role_id>'
             Delete the Role data from Database
         returns status code 200 and json {"success": True, "role_id": role_id} where role_id is the id of the role deleted
-            or appropriate status code indicating reason for failure
+            or the Status Code in case of Failure
     '''
     @app.route('/casting-role/<int:role_id>', methods=['DELETE'])
-    #@requires_auth('delete:castingRoles')
+    @requires_auth('delete:castingRoles')
     def delete_castingRole(payload, role_id):
         
         role = CastingRole.query.filter(CastingRole.role_id == role_id).one_or_none()
@@ -511,7 +516,7 @@ def create_app(test_config=None):
             raise InternalServerError(message)
 
     @app.route('/casting-roles/movie/<int:movie_id>', methods=['GET'])
-    #@requires_auth('get:castingRoles')
+    @requires_auth('get:castingRoles')
     def get_movie_roles(payload, movie_id):
         movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
         roles = movie.roles
@@ -602,3 +607,10 @@ def create_app(test_config=None):
         return response
 
     return app
+
+
+app = create_app()
+
+if __name__ == '__main__':
+    #    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
