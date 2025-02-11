@@ -106,7 +106,6 @@ def verify_decode_jwt(token):
                 'code': 'invalid_claims',
                 'description': 'Incorrect claims. Please, check the audience and issuer.'
             }, 401)
-        except jose.exceptions.JWSError
         except Exception:
             raise AuthError({
                 'code': 'invalid_header',
