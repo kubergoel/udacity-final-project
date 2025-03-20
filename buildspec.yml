@@ -17,11 +17,11 @@ phases:
       - aws configure set aws_secret_access_key A2Zv4oZBFT6b4DLHdQeSJx27+lLhtuSDGQTtM6m5
       - aws configure set default.region us-east-1ß
       - echo "Setting up kubeconfig..."
-      - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_DEFAULT_REGION
+      - aws eks update-kubeconfig --name  --region us-east-1
   build:
     commands:
       - echo "Deploying PostgreSQL..."
-      - kubectl apply -f Postgres-deployment.yml
+      - kubectl apply -f postgres-deployment.yml
       - echo "Deploying application..."
       - kubectl apply -f udacity-final-project-deployment.yaml
   post_build:
