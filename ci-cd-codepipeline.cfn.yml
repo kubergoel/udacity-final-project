@@ -115,49 +115,46 @@ Resources:
   CustomResourceLambda:
     Type: AWS::Lambda::Function
     Properties:
+      Layers:
+        - arn:aws:lambda:us-east-1:063561735450:layer:requests-layer:2
       Code:
         ZipFile: |
           import json
           import boto3
-          from botocore.vendored import requests
+          import requests
+          import cfnresponse
+
           def handler(event, context):
-            response = {
-              'Status': 'SUCCESS',
-              "Reason": "See the details in CloudWatch Log Stream: " + context.log_stream_name,
-              'PhysicalResourceId': context.log_stream_name,
-              'StackId': event['StackId'],
-              'RequestId': event['RequestId'],
-              'LogicalResourceId': event['LogicalResourceId'],
-              'Data': {"Message": "Resource creation successful!"},
-            }
+              client = boto3.client('iam')
+              responseData = {}
 
-            client = boto3.client('iam')
-            try:
-              if event['RequestType'] == 'Create':
-                kubectl_role_name = event['ResourceProperties']['KubectlRoleName']
-                build_role_arn = event['ResourceProperties']['CodeBuildServiceRoleArn']
+              try:
+                  if event['RequestType'] == 'Create':
+                      kubectl_role_name = event['ResourceProperties']['KubectlRoleName']
+                      build_role_arn = event['ResourceProperties']['CodeBuildServiceRoleArn']
 
-                assume = client.get_role(RoleName = kubectl_role_name)
-                assume_doc = assume['Role']['AssumeRolePolicyDocument']
-                roles = [ { 'Effect': 'Allow', 'Principal': { 'AWS': build_role_arn }, 'Action': 'sts:AssumeRole' } ]
+                      assume = client.get_role(RoleName=kubectl_role_name)
+                      assume_doc = assume['Role']['AssumeRolePolicyDocument']
+                      roles = [
+                          {'Effect': 'Allow', 'Principal': {'AWS': build_role_arn}, 'Action': 'sts:AssumeRole'}
+                      ]
 
-                for statement in assume_doc['Statement']:
-                  if 'AWS' in statement['Principal']:
-                    if statement['Principal']['AWS'].startswith('arn:aws:iam:'):
-                      roles.append(statement)
+                      for statement in assume_doc['Statement']:
+                          if 'AWS' in statement['Principal']:
+                              if statement['Principal']['AWS'].startswith('arn:aws:iam:'):
+                                  roles.append(statement)
 
-                assume_doc['Statement'] = roles
-                update_response = client.update_assume_role_policy(RoleName = kubectl_role_name, PolicyDocument = json.dumps(assume_doc))
-            except Exception as e:
-              print(e)
-              response['Status'] = 'FAILED'
-              response["Reason"] = e
-              response['Data'] = {"Message": "Resource creation failed"}
+                      assume_doc['Statement'] = roles
+                      client.update_assume_role_policy(RoleName=kubectl_role_name, PolicyDocument=json.dumps(assume_doc))
 
-            response_body = json.dumps(response)
-            headers = {'content-type': '', "content-length": str(len(response_body)) }
-            put_response = requests.put(event['ResponseURL'], headers=headers, data=response_body)
-            return response
+                      responseData["Message"] = "Resource creation successful!"
+                      cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData)
+
+              except Exception as e:
+                  print(f"Error: {e}")
+                  responseData["Message"] = "Resource creation failed"
+                  responseData["Error"] = str(e)
+                  cfnresponse.send(event, context, cfnresponse.FAILED, responseData)
 
       Handler: index.handler
       Role: !GetAtt CustomResourceLambdaExecutionRole.Arn
@@ -166,6 +163,7 @@ Resources:
 
   CustomResourceLambdaExecutionRole:
     Type: AWS::IAM::Role
+    DeletionPolicy: Retain
     Properties:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
@@ -184,7 +182,7 @@ Resources:
           PolicyDocument:
             Version: 2012-10-17
             Statement:
-              - Resource: !Sub arn:aws:iam::063561735450:role/UdacityFlaskDeployCBKubectlRole
+              - Resource: !Sub arn:aws:iam::${AWS::AccountId}:role/UdacityFlaskDeployCBKubectlRole
                 Effect: Allow
                 Action:
                   - iam:GetRole
@@ -252,7 +250,7 @@ Resources:
           PolicyDocument:
             Version: 2012-10-17
             Statement:
-              - Resource: !Sub arn:aws:iam::${AWS::AccountId}:role/${KubectlRoleName}
+              - Resource: !Sub arn:aws:iam::${AWS::AccountId}:role/UdacityFlaskDeployCBKubectlRole
                 Effect: Allow
                 Action:
                   - sts:AssumeRole
@@ -291,7 +289,7 @@ Resources:
                   - s3:GetObject
                   - s3:PutObject
                   - s3:GetObjectVersion
-              - Resource: !Sub arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/${EcrDockerRepository}
+              - Resource: !Sub arn:aws:ecr:us-east-1:063561735450:repository/${EcrDockerRepository}
                 Effect: Allow
                 Action:
                   - ecr:GetDownloadUrlForLayer
@@ -315,7 +313,7 @@ Resources:
         Image: !Ref CodeBuildDockerImage
         EnvironmentVariables:
           - Name: REPOSITORY_URI
-            Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${EcrDockerRepository}
+            Value: !Sub 063561735450.dkr.ecr.us-east-1.amazonaws.com/${EcrDockerRepository}
           - Name: REPOSITORY_NAME
             Value: !Ref GitSourceRepo
           - Name: REPOSITORY_BRANCH
@@ -323,7 +321,7 @@ Resources:
           - Name: EKS_CLUSTER_NAME
             Value: !Ref EksClusterName
           - Name: EKS_KUBECTL_ROLE_ARN
-            Value: !Sub arn:aws:iam::${AWS::AccountId}:role/${KubectlRoleName}
+            Value: !Sub arn:aws:iam::063561735450:role/UdacityFlaskDeployCBKubectlRole
         PrivilegedMode: true
       Name: !Ref AWS::StackName
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn

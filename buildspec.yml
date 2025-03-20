@@ -47,6 +47,6 @@ phases:
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --role-arn $EKS_KUBECTL_ROLE_ARN
       - kubectl apply -f postgres-deployment.yml 
       - kubectl apply -f udacity-final-project-deployment.yml 
-      - printf '[{"name":"eksctl-demo","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
+      - printf '[{"name":"eksctl-udacity-kuber","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
 artifacts:
   files: build.json
