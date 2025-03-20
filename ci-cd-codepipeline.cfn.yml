@@ -116,7 +116,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       Layers:
-        - arn:aws:lambda:us-east-1:063561735450:layer:requests-layer:2
+        - arn:aws:lambda:us-east-1:063561735450:layer:requests-layer:3
       Code:
         ZipFile: |
           import json
@@ -158,7 +158,7 @@ Resources:
 
       Handler: index.handler
       Role: !GetAtt CustomResourceLambdaExecutionRole.Arn
-      Runtime: python3.9
+      Runtime: python3.12
       Timeout: 300
 
   CustomResourceLambdaExecutionRole:
