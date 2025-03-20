@@ -1,52 +1,29 @@
----
 version: 0.2
-
 
 phases:
   install:
-    runtime-versions:
-      python: 3.12
     commands:
-      - echo 'about to call dockerd'
-      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2&
-      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
-      - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
-      # You must use a kubectl version that is within one minor version difference of your Amazon EKS cluster control plane. 
-      # For example, a 1.21 kubectl client works with Kubernetes 1.20, 1.21 and 1.22 clusters.
-      # Ref: https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html OR https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-      # To download a specific version v1.22.0 on Linux, use:
-      - curl -LO https://dl.k8s.io/release/v1.23.6/bin/linux/amd64/kubectl
-      # Download the kubectl checksum file
-      - curl -LO "https://dl.k8s.io/v1.23.6/bin/linux/amd64/kubectl.sha256"
-      # Validate the kubectl binary against the checksum file
-      - echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
-      # Install kubectl
-      - chmod +x ./kubectl ./aws-iam-authenticator      
-      - export PATH=$PWD/:$PATH  
-      - python --version
-      - echo 'export PATH=$PWD/:$PATH' >> $HOME/.bashrc
-      - echo `kubectl version --short --client`
-      - python -m pip install --upgrade --force pip
-      - apt-get update && apt-get -y install jq  && pip install --upgrade awscli
+      - echo "Installing dependencies..."
+      - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+      - chmod +x kubectl
+      - mv kubectl /usr/local/bin/
+      - curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/latest/download/aws-iam-authenticator-linux-amd64
+      - chmod +x aws-iam-authenticator
+      - mv aws-iam-authenticator /usr/local/bin/
   pre_build:
-      commands:
-        - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
-        - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' deployment.yml
-        - $(aws ecr get-login --no-include-email)
-        - export KUBECONFIG=$HOME/.kube/config
-        - echo `ls -l`
+    commands:
+      - echo "Configuring AWS credentials..."
+      - aws configure set aws_access_key_id AKIAQ5TETDUNKPVMHVFO
+      - aws configure set aws_secret_access_key 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
+      - aws configure set default.region us-east-1ß
+      - echo "Setting up kubeconfig..."
+      - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_DEFAULT_REGION
   build:
     commands:
-      - docker build --tag $REPOSITORY_URI:$TAG .
-
+      - echo "Deploying PostgreSQL..."
+      - kubectl apply -f Postgres-deployment.yml
+      - echo "Deploying application..."
+      - kubectl apply -f udacity-final-project-deployment.yaml
   post_build:
     commands:
-      - docker push $REPOSITORY_URI:$TAG
-      - echo $EKS_CLUSTER_NAME
-      - echo $EKS_KUBECTL_ROLE_ARN
-      - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --role-arn $EKS_KUBECTL_ROLE_ARN
-      - kubectl apply -f postgres-deployment.yml 
-      - kubectl apply -f udacity-final-project-deployment.yml 
-      - printf '[{"name":"eksctl-udacity-kuber","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
-artifacts:
-  files: build.json
+      - echo "Deployment completed."
