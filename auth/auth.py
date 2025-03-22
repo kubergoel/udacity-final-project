@@ -5,7 +5,6 @@ from jose import jwt
 from urllib.request import urlopen
 import os
 
-#https://dev-iyauk2au1anrxgs7.us.auth0.com/authorize?audience=casting-agency-api&response_type=token&client_id=LLlhXGEd6NaHPLYbwLxdXQp8M70mILEt&redirect_uri=https://127.0.0.1:5000/
 AUTH0_DOMAIN = 'dev-iyauk2au1anrxgs7.us.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'casting-agency-api'

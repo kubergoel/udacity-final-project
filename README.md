@@ -1,26 +1,15 @@
 # API Development and Documentation Final Project
 
-## Trivia App
+## Capstone Casting Agency App
 
-Udacity is invested in creating bonding experiences for its employees and students. A bunch of team members got the idea to hold trivia on a regular basis and created a webpage to manage the trivia app and play the game, but their API experience is limited and still needs to be built out.
+The project documented here is the final project of Udacity Full Stack Nanodegree Program. The goal here is to create a Flask application with Postgres Database that should be deployed in the AWS kubernetes engine along with CI/CD pipelines. Also, we need to enable the Authentication and role-based access control using Auth0. 
 
-That's where you come in! Help them finish the trivia app so they can start holding trivia and seeing who's the most knowledgeable of the bunch. The application must:
-
-1. Display questions - both all questions and by category. Questions should show the question, category and difficulty rating by default and can show/hide the answer.
-2. Delete questions.
-3. Add questions and require that they include question and answer text.
-4. Search for questions based on a text query string.
-5. Play the quiz game, randomizing either all questions or within a specific category.
-
-Completing this trivia app will give you the ability to structure plan, implement, and test an API - skills essential for enabling your future applications to communicate with others.
+This project depicts the backend APIs that can be integrated to any Frontend application.
 
 ## Starting and Submitting the Project
 
-[Fork](https://help.github.com/en/articles/fork-a-repo) the project repository and [clone](https://help.github.com/en/articles/cloning-a-repository) your forked repository to your machine. Work on the project locally and make sure to push all your changes to the remote repository before submitting the link to your repository in the Classroom.
+[clone](https://github.com/kubergoel/udacity-final-project.git) the project repository to your machine. Work on the project locally and make sure to push all your changes to the remote repository before submitting the link to your repository in the Classroom.
 
-## About the Stack
-
-We started the full stack application for you. It is designed with some key functional areas:
 
 ### Backend
 
@@ -31,49 +20,48 @@ The [backend](./backend/README.md) directory contains a partially completed Flas
 
 Install Backend Dependencies
 
-Please follow the below steps to complete installation process:
+Please follow the below steps to start the application on local environment:
 
-1. Make sure python is installed in the system, you can check the version of python using below command:
+1. Make sure python v3.12 is installed in the system, you can check the version of python using below command:
     python --version
 
 2. Set up Virtual Environment for the project to keep the dependencies for the project separate and organized. Please use below commands to create a virtual env and activate it in Windows:
     python -m venv venv
-    source venv/Scripts/activate
+    source myvenv/bin/activate
 
 3. Once the virtual environment is setup and running, install the required dependencies by navigating to the /backend directory and running:
      pip install -r requirements.txt
 
-Set up the Database for trivia application:
+Set up the Database for casting_agency application:
 
-1. With Postgres running, create a trivia database:
-    create DATABASE trivia;
-2. Populate the database using the trivia.psql file provided. From the backend folder in terminal run:
-    psql -Upostgres trivia < trivia.psql
+Populate the database using the database/init.sql file provided. From the backend folder in terminal run:
+    psql -Upostgres < database/init.sql
 
-Plaesae use the below steps to set up the database for the TEST cases:
+The above script will create both the casting_agency DB and test_casting_agency DB used to execute the test cases.
 
-1. Create a trivia_test Database:
-    create DATABASE trivia_test;
-2. Create a test user trivia_test_user:
-    create USER trivia_test_user WITH ENCRYPTED PASSWORD 'trivia_test';
-3. Grant the permissions to the user on the database:
-    grant ALL PRIVILEGES ON DATABASE trivia_test TO trivia_test_user;
-    ALTER USER trivia_test_user CREATEDB;
-    ALTER USER trivia_test_user WITH SUPERUSER;
-4. Finally, populate the database using the trivia.psql file provided. From the backend folder in terminal run:
-    psql -Utrivia_test_user trivia_test < trivia.psql
 
-Run the Server
+Run the Server:
 
 To run the server, use the below command in the /backend folder:
-   export FLASK_APP=flaskr
+   export FLASK_APP=app.py
    export FLAS_ENV=development
-   FLASK_APP=flaskr FLASK_DEBUG=true flask run
+   FLASK_APP=app.py FLASK_DEBUG=true flask run
+
+To run the test case, use the below command:
+    python test_app.py
+
+Authorization & Authentication:
+
+The access token for making the REST calls is generated using Auth0. Use the below URL to generate the access token:
+
+https://dev-iyauk2au1anrxgs7.us.auth0.com/authorize?audience=casting-agency-api&response_type=token&client_id=LLlhXGEd6NaHPLYbwLxdXQp8M70mILEt&redirect_uri=https://127.0.0.1:5000/
+
+Note: Make sure the application is up in local mode while generating the token.
 
 API Documentation
 
-GET '/categories'
-    1. Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
+GET '/movies'
+    1. Fetches list of Movie with the permission: 'get:movies'
     2. Request Arguments: None
     3. Returns: An object with a single key, categories, that contains an object of id: category_string key: value pairs.
     4. Example:
@@ -218,32 +206,3 @@ POST '/quizzes'
             },
             "success": true
             }
-
-### Frontend
-
-The [frontend](./frontend/README.md) directory contains a complete React frontend to consume the data from the Flask server. If you have prior experience building a frontend application, you should feel free to edit the endpoints as you see fit for the backend you design. If you do not have prior experience building a frontend application, you should read through the frontend code before starting and make notes regarding:
-
-1. What are the end points and HTTP methods the frontend is expecting to consume?
-2. How are the requests from the frontend formatted? Are they expecting certain parameters or payloads?
-
-Pay special attention to what data the frontend is expecting from each API response to help guide how you format your API. The places where you may change the frontend behavior, and where you should be looking for the above information, are marked with `TODO`. These are the files you'd want to edit in the frontend:
-
-1. `frontend/src/components/QuestionView.js`
-2. `frontend/src/components/FormView.js`
-3. `frontend/src/components/QuizView.js`
-
-By making notes ahead of time, you will practice the core skill of being able to read and understand code and will have a simple plan to follow to build out the endpoints of your backend API.
-
-Installing Dependencies
-
-1. Installing Node and NPM This project depends on Nodejs and Node Package Manager (NPM). Before continuing, you must download and install Node (the download includes NPM) from https://nodejs.com/en/download. Please check the version of the node using below command:
-    node --version
-
-2. Installing project dependencies This project uses NPM to manage software dependencies. NPM Relies on the package.json file located in the /frontend directory of this repository. After cloning, open your terminal and run:
-    npm install
-
-Running Your Frontend in Dev Mode
-1. The frontend app was built using create-react-app. In order to run the app in development mode use npm start. You can change the script in the package.json file.
-    npm start
-    
-2. Open http://localhost:3000 to view it in the browser. The page will reload if you make edits.
