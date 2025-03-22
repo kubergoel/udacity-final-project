@@ -13,10 +13,10 @@ This project depicts the backend APIs that can be integrated to any Frontend app
 
 ### Backend
 
-The [backend](./backend/README.md) directory contains a partially completed Flask and SQLAlchemy server. You will work primarily in `__init__.py` to define your endpoints and can reference models.py for DB and SQLAlchemy setup. These are the files you'd want to edit in the backend:
+The [backend](./backend/README.md) directory contains a partially completed Flask and SQLAlchemy server. You will work primarily in `app.py` to define your endpoints and can reference models.py for DB and SQLAlchemy setup. These are the files you'd want to edit in the backend:
 
-1. `backend/flaskr/__init__.py`
-2. `backend/test_flaskr.py`
+1. `app.py`
+2. `test_app.py`
 
 Install Backend Dependencies
 
@@ -57,6 +57,8 @@ The access token for making the REST calls is generated using Auth0. Use the bel
 https://dev-iyauk2au1anrxgs7.us.auth0.com/authorize?audience=casting-agency-api&response_type=token&client_id=LLlhXGEd6NaHPLYbwLxdXQp8M70mILEt&redirect_uri=https://127.0.0.1:5000/
 
 Note: Make sure the application is up in local mode while generating the token.
+
+The application is deployed on AWS Kubernetes engine along with CI/CD pipeline. So, any change made to the repository will automatically trigger the build and changes will be reflected automatically.
 
 API Documentation
 
