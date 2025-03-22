@@ -1,0 +1,546 @@
+{
+	"info": {
+		"_postman_id": "4f13f70d-98e9-4254-afd7-5670b520a1cc",
+		"name": "casting-agency",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40512254"
+	},
+	"item": [
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/movies",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NGVkOGFhZDc1M2U2YWZjZDYxMDciLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2MzcyODEsImV4cCI6MTc0MjcyMzY1Miwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyJdfQ.T3cncNES7vu4N3V1ouFj1oiL4IrQ4D9AeFLKUkuxfHSZ82Z3u5T-tA6xay9R-0gelQ6Ev2kll2kv8JgJRYUbosJ2_P4CukG-W-9vvC97W7ZQocGCzuU2gh_Jpu9y-YYNyk8qDqhpZTClzxZ9iSkqMOwNOqkO6-WB2kq2rOZoXcJp0YkPvAzLyAA5aAUZQwZe3CBHxaIqRohcF5mafVZRBynaHzusN3KDoylZM03wPIpVscuWsVq1NjnmipRy1G8WdH9kJQaNGrshRCOcVKa0QGXCHKIaztVwbo4r2QOlih0zlbLwY_QtBcS9Zia-RCQ86tO8uUzCVoxX21O7RSiz-g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/movies",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"movies"
+					]
+				},
+				"description": "Rest API to fetch all the movies "
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"Harry Potter 3\", \"genre\": \"Fantasy\", \"release_date\": \"2018-12-22\", \"description\": \"J.K. Rowling's 2nd best Movie\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/movie",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"movie"
+					]
+				},
+				"description": "Rest API to save a new Movie.\nThe request need to provided in hte below JSON format:\n{\"title\": \"Harry Potter 6\", \"genre\": \"Fantasy\", \"release_date\": \"2025-12-12\", \"description\": \"J.K. Rowling's 5th best Movie\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/movie/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"release_date\": \"2025-05-12\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/movie/1",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"movie",
+						"1"
+					]
+				},
+				"description": "Rest API to Update a movie corresponding to given Movie ID.\n\nThe updated value need to be provided as JSON text. For e.g:\n{\"release_date\": \"2025-05-12\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/movie/3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/movie/3",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"movie",
+						"3"
+					]
+				},
+				"description": "Rest API to Delete a movie corresponding to given Movie ID.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/actors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/actors",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"actors"
+					]
+				},
+				"description": "Rest API to fetch all the actors"
+			},
+			"response": []
+		},
+		{
+			"name": "Actor Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Test User2121221\", \"age\": \"40\", \"gender\": \"Male\", \"city\": \"Los Angles1\", \"state\": \"LA\", \"address\": \"521 Lane Apt 501\", \"phone\": \"9717811722\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/actor",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"actor"
+					]
+				},
+				"description": "Rest API to save a Movie"
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/actor/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/actor/2",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"actor",
+						"2"
+					]
+				},
+				"description": "Rest API to fetch an actor for an ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/actor/2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/actor/2",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"actor",
+						"2"
+					]
+				},
+				"description": "API to delete an Actor"
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/casting-roles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/casting-roles",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"casting-roles"
+					]
+				},
+				"description": "API to GET all the Casting Roles"
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/casting-role",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"role_name\": \"Black Test\", \"is_lead_role\": true, \"description\": \"Black Widow Role\", \"movie_id\": \"1\", \"actor_id\": \"1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/casting-role",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"casting-role"
+					]
+				},
+				"description": "API to Create a new Casting Role"
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/casting-role/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"role_name\": \"Black Widowwqqqw\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/casting-role/1",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"casting-role",
+						"1"
+					]
+				},
+				"description": "API to update the Casting Role"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/casting-role/3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3Mzc1NjQyOTIsImV4cCI6MTczNzU3MTQ5Miwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.fLE38783N7BNVU70nIo0aM47Cq01DUsnTEO2nflaie83gjFRys-25Pbxgx9vhfOXtYPOK2_1zWmxvHipSLFTJlCnuE_ryGXZ3W0kkUOOCmCpp3CDiJkbtfJU91x3vbFIe9wLXhHeCuoI9-PSZh5lnjU1E-elFp1LJW7zbh1aK9Pd6Z5BczFsMp5fkk1K4gMmuP3XnYOSx6EPpgTc1yd_KAVjYKir9Vwpd8FhAjh-FyqXgczKi9WEBjQca3G135Jqoipibg7u18h8a5tvZL2S-oO4w35wAlTkAijq_hNgJzwYvv65jcqRgR6jNxejck5afFyvlEcvlQaTa7xWBfGPDA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/casting-role/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"casting-role",
+						"3"
+					]
+				},
+				"description": "API to delete a Casting Role"
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/movie/2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2N2EzYTNkMjlhNDljNGRmZjMyOTkxMTMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3Mzg4NjM5MDAsImV4cCI6MTczODk1MDI3MSwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyJdfQ.Ju05aSNBFUmOQRk_Mwl5JTLCgHFnqBbLQ-TXQAmF32VIISr3-qw_29NhJyA-pJl2c1KMyuJSHzl-Uv8dpxxa946wFKqj08m1hQO1sZiOvkSu-o3wkx6VgPafoAiCVSswxJFYfUiS9XY96BjZii9AjBZfU6gMtkd0I_nNPJp2pVD052C-HNHOPA_OGJGXg4f2TY1y9u9619O9h_jqO3qognKItX4c_vNtR67RryV9CekjRq4zaMFWrmo-ECG25LlkeA3-Oaiu-MhoYB1buzo4Tgtesc-i3XR2w-KRKJtNB_B5dnL2HveZU1ce5iDKJ2Fhivnqj8E4x3mK3mzTGQ4uAg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/movie/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"movie",
+						"2"
+					]
+				},
+				"description": "API to fetch Movie details for given Movie ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/actor/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlHZjBQTTVxcDJfNnBwSkt3NGJGOSJ9.eyJpc3MiOiJodHRwczovL2Rldi1peWF1azJhdTFhbnJ4Z3M3LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2Nzg5NTNlMzQ5NjFhOTJhYmM0MTllZWMiLCJhdWQiOiJjYXN0aW5nLWFnZW5jeS1hcGkiLCJpYXQiOjE3NDI2Mzc0NzksImV4cCI6MTc0MjcyMzg1MCwic2NvcGUiOiIiLCJhenAiOiJMTGxoWEdFZDZOYUhQTFlid0x4ZFhRcDhNNzBtSUxFdCIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJkZWxldGU6Y2FzdGluZ1JvbGVzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6Y2FzdGluZ1JvbGVzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOmNhc3RpbmdSb2xlcyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDpjYXN0aW5nUm9sZXMiLCJwb3N0Om1vdmllcyJdfQ.CjQwZ9Lr2ELlIvTONEDVLsNf9PwZuIltiJRUPU-JYxJhpdQLgivFu1__MPZKfsCZrqyf-N7xy6MzILSE19u6j5XIxJRc9JUXZvZAkAsOq5wIZRRO0uFjTxmVvhZgZ5CeSKi2qOV4yr2vByJ7qKTszqidZmZRnRbremIohfnAVEHUPl-GOXSofOrrfNAS03jPXGkjHU1_goHmCJ74VaodysHM9aGUAMevx4vh35Z6_GMOJnAiJUGn8YinNXFzj6WivPdSPf6kK6sB7r7GqaRs7lXC_hK6WWGnrnmMhurNedZIxFS37atZF_ndxWHuDdcy9VZOc0EzB7CMni3Nx2YwIQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Robert Downey Sr10.\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://aa80644bf1ed84cb9b506114751734a1-250180757.us-east-1.elb.amazonaws.com/actor/1",
+					"protocol": "http",
+					"host": [
+						"aa80644bf1ed84cb9b506114751734a1-250180757",
+						"us-east-1",
+						"elb",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"actor",
+						"1"
+					]
+				},
+				"description": "API to update the Casting Agency"
+			},
+			"response": []
+		}
+	]
+}
