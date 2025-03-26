@@ -4,10 +4,7 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 import os
-
-AUTH0_DOMAIN = 'dev-iyauk2au1anrxgs7.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'casting-agency-api'
+from .auth_settings import AUTH0_DOMAIN, ALGORITHMS, API_AUDIENCE
 
 ## AuthError Exception
 '''
